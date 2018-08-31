@@ -2,4 +2,6 @@
 {{object.description}} <br/>
 {{ object.price }} <br/>
 
-<img src={{ object.image.url }} />
+{% if object.image %}
+	<img src={{ object.image.url }} />
+{% endif %}	
