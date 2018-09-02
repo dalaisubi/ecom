@@ -19,6 +19,8 @@ from django.conf.urls.static import static
 
 from django.contrib import admin
 from django.urls import path , include
+
+from django.views.generic import TemplateView
 from .views import home_page, about_page, contact_page, login_page, register_page
 
 # from products.views import (
@@ -41,6 +43,8 @@ urlpatterns = [
     path('register/', register_page, name='register'),
 
     path('products/', include('products.urls', namespace='products')),
+
+    path('bootstrap/', TemplateView.as_view(template_name='bootstrap/bootstrap.html'))
     # path('products',ProductListView.as_view()),
     # path('products-fbv', product_list_view),
 
