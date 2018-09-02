@@ -44,7 +44,9 @@ urlpatterns = [
 
     path('products/', include('products.urls', namespace='products')),
 
-    path('bootstrap/', TemplateView.as_view(template_name='bootstrap/bootstrap.html'))
+    path('bootstrap/', TemplateView.as_view(template_name='bootstrap/bootstrap.html')),
+
+    path('search/', include('search.urls', namespace='search')),
     # path('products',ProductListView.as_view()),
     # path('products-fbv', product_list_view),
 
