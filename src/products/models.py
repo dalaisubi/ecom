@@ -1,3 +1,4 @@
+from django.db.models import Q
 import random 
 import os
 from django.db import models
@@ -29,6 +30,11 @@ class ProductQuerySet(models.query.QuerySet):
 	def active(self):
 		return self.filter(active=True)	
 
+	def search(self, query):
+		looksup = (Q(title__icontains=query) |
+						  Q(description__icontains=query) |
+						  Q(price__icontains=query))			
+		return self.filter(looksup).distinct()
 class ProductManager(models.Manager):
 	def get_queryset(self):
 		return ProductQuerySet(self.model, using= self._db)
@@ -44,6 +50,9 @@ class ProductManager(models.Manager):
 		if qs.count() == 1:
 			return qs.first()
 		return None	
+
+	def search(self, query):		
+		return self.get_queryset().active().search(query)
 class Product(models.Model):
 	title = models.CharField(max_length=120)
 	slug = models.SlugField(blank=True, unique=True)
