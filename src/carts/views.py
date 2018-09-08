@@ -20,7 +20,8 @@ def cart_update(request):
 		if product_obj in cart_obj.products.all():
 			cart_obj.products.remove(product_obj)
 		else:
-			cart_obj.products.add(product_obj)	
+			cart_obj.products.add(product_obj)
+		request.session['cart_items'] = cart_obj.products.count()		
 		return redirect("cart:home")		
 	#return redirect(product_obj.get_absolute_url())
 	
