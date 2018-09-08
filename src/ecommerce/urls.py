@@ -22,7 +22,6 @@ from django.urls import path , include
 
 from django.views.generic import TemplateView
 from .views import home_page, about_page, contact_page, login_page, register_page
-from carts.views import cart_home
 # from products.views import (
 #     ProductListView, 
 #     product_list_view,
@@ -48,7 +47,7 @@ urlpatterns = [
 
     path('search/', include('search.urls', namespace='search')),
 
-    path ('cart/', cart_home, name='cart'),
+    path('cart/', include('carts.urls', namespace='cart'))
     # path('products',ProductListView.as_view()),
     # path('products-fbv', product_list_view),
 
