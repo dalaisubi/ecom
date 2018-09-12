@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path , include
 from django.contrib.auth.views import LogoutView
-from accounts.views import login_page, register_page
+from accounts.views import login_page, register_page, guest_register_page
 from django.views.generic import TemplateView
 from .views import home_page, about_page, contact_page
 # from products.views import (
@@ -40,6 +40,7 @@ urlpatterns = [
 	path('contact', contact_page, name='contact'),
     path('admin/', admin.site.urls),
     path('login/', login_page, name='login'),
+    path('register/guest', guest_register_page, name='guest_register'),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('register/', register_page, name='register'),
 
