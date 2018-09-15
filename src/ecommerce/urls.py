@@ -23,6 +23,7 @@ from django.contrib.auth.views import LogoutView
 from accounts.views import login_page, register_page, guest_register_page
 from django.views.generic import TemplateView
 from .views import home_page, about_page, contact_page
+from addresses.views import checkout_address_create_view
 # from products.views import (
 #     ProductListView, 
 #     product_list_view,
@@ -50,7 +51,9 @@ urlpatterns = [
 
     path('search/', include('search.urls', namespace='search')),
 
-    path('cart/', include('carts.urls', namespace='cart'))
+    path('cart/', include('carts.urls', namespace='cart')),
+    
+    path('checkout/address/create/', checkout_address_create_view, name='checkout_address_create'),
     # path('products',ProductListView.as_view()),
     # path('products-fbv', product_list_view),
 
