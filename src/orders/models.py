@@ -2,6 +2,7 @@ from django.db import models
 import math
 from django.db.models.signals import pre_save, post_save
 from carts.models import Cart
+from addresses.models import Address
 from billing.models import BillingProfile
 from ecommerce.utils import unique_order_id_generator
 # Create your models here.
@@ -33,9 +34,8 @@ class OrderManger(models.Manager):
 class Order(models.Model):
 	billing_profile = models.ForeignKey(BillingProfile,null=True,blank=True, on_delete=models.CASCADE)
 	order_id = models.CharField(max_length=120, blank=True)
-	# billing_profile = ?
-	# shipping_address
-	# billing_address
+	shipping_address = models.ForeignKey(Address,null=True,blank=True, on_delete=models.CASCADE, related_name='shipping_address')
+	billing_address = models.ForeignKey(Address,null=True,blank=True, on_delete=models.CASCADE, related_name='billing_address')
 	cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
 	status = models.CharField(max_length=120, default='created', choices=ORDER_STATUS_CHOICES)
 	shipping_total = models.DecimalField(default=5.99, max_digits=100, decimal_places=2)
